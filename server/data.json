@@ -20,6 +20,27 @@
             "data" : "2022-10-24 11:00:00",
             "useFor": "drinks",
             "id":3
+        },
+        {
+            "type": "pay",
+            "money": -33,
+            "data" : "2022-10-24 11:00:01",
+            "useFor": "drinks",
+            "id":4
+        },
+        {
+            "type": "pay",
+            "money": -56,
+            "data" : "2022-10-24 11:02:00",
+            "useFor": "drinks",
+            "id":5
+        },
+        {
+            "type": "pay",
+            "money": -888,
+            "data" : "2022-10-24 11:00:00",
+            "useFor": "entertainment",
+            "id":6
         }
     ]
 }
