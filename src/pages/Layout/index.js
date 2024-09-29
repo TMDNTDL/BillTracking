@@ -1,9 +1,10 @@
 import { Outlet, useNavigate } from "react-router-dom"
 import { Button } from "antd-mobile"
 import { useEffect } from "react"
-import { useDispatch } from "react-redux"
-import { getBillList } from "@/store/modules/billStore"
+import { useDispatch, useSelector} from "react-redux"
+import { getBillList, setActiveIndex } from "@/store/modules/billStore"
 import './index.scss'
+import classNames from "classnames"
 
 const Layout = () =>{
 
@@ -28,8 +29,8 @@ const Layout = () =>{
         
         }
     ]
-
-
+    //const { activeIndex } = useSelector(state => state.billReducer)
+    const activeIndex = useSelector(state => state.bill.activeIndex)
     const dispatch = useDispatch()
     useEffect(()=>{
         dispatch(getBillList())
@@ -50,10 +51,12 @@ const Layout = () =>{
                 <Outlet />
             </div>
             <div className="footer">
-                {tabs.map(item =>{
+                {tabs.map((item,index) =>{
                     return(
-                        <div className="button_list">
-                             <button className={`button-${item.name}`} onClick={() => switchRoute(item.key)}>
+                        <div className='button_list'>
+                             <button className={classNames(`button-${item.name}`, activeIndex === index && 'active')} onClick={() => {
+                                dispatch(setActiveIndex(index))
+                                switchRoute(item.key)}}>
                             
                             </button>
                             <div className="button-text">{item.title}</div>
