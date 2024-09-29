@@ -63,5 +63,13 @@
     margin-top: 5px;
     border: none;
 }
-
+.layout .footer .button-Monthly.active{
+    background-image: url(./image/green_bill.png);
+}
+.layout .footer .button-New.active{
+    background-image: url(./image/green_plus.jpg);
+}
+.layout .footer .button-Yearly.active{
+    background-image: url(./image/green_calculator.jpg);
+}
 

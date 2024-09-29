@@ -5,18 +5,23 @@ const billStore = createSlice({
     name:'bill',
     // state
     initialState:{
-        billList:[]
+        billList:[],
+        activeIndex : 0
     },
     reducers:{
         // set method
         setBillList(state,action){
             state.billList = action.payload
+        },
+        setActiveIndex(state, action){
+            state.activeIndex = action.payload;
         }
+
     }
 })
 
 //destructre actionCreator funciton
-const { setBillList } = billStore.actions
+const { setBillList, setActiveIndex } = billStore.actions
 
 const getBillList = () =>{
     return (dispatch) =>{
@@ -25,7 +30,7 @@ const getBillList = () =>{
         dispatch(setBillList(res.data))
     }
 }
-export {getBillList}
+export {getBillList, setActiveIndex}
 // export reducer
 const reducer = billStore.reducer
 
