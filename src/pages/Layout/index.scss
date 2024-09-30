@@ -1,7 +1,10 @@
 .layout{
     .container {
         position: fixed;
+        display: flex;
+        //justify-content: space-evenly;
         top:0;
+        width: 100%;
         bottom: 50px;
     }
     .footer{

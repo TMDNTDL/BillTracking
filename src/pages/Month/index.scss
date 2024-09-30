@@ -1,0 +1,70 @@
+.monthyBill{
+    height: 100%;
+    width: 100%;
+    background:linear-gradient(180deg, #ffffff, #f5f5f5 100%);
+    background-size: 100% 240px;
+    background-repeat: no-repeat;
+ 
+    
+    > .title{
+        margin-top:10px;
+        
+        // position: absolute;
+        text-align: center;
+        left:50%;
+        transform: translate(0%, -0%); /* Center it perfectly */
+        
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 18px;
+    }
+
+    > .header{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        background-image: url(./image/drakBackground.jpg);
+        border-radius: 8px;
+
+        margin-top: 15px;
+        height: 150px;
+        // > .header{
+        //     height: 135px;
+        //     padding: 20px 20px 0px 18.5px;
+        //     margin-bottom: 10px;
+        // }
+        > .summary{
+            display: flex;
+            justify-content: space-evenly;
+            color: #ffffff;
+            font-size: 15px;
+            > .spent .title-spent{
+                margin-top: 5px;
+            }
+            > .income .title-income{
+                margin-top: 5px;
+            } 
+            > .remain .title-remain{
+                margin-top: 5px;
+            }
+        }
+        > .date{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+
+            // use justify-content to center flex item within their contianer
+            // use text-align to control how the text is aligned within its specific block container
+            // by default if you were to remove text-align the text in the block will be initially align-left.
+            > .text{
+                // position: absolute;
+                left: 50%;
+                text-align: center;
+                transform: translate(-95%,-0%);
+                font-family: 'Courier New', Courier, monospace;
+                color: #ffffff;
+            }
+        }
+    }
+}
+
+
