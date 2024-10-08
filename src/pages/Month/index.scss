@@ -32,6 +32,26 @@
         //     padding: 20px 20px 0px 18.5px;
         //     margin-bottom: 10px;
         // }
+        > .date{
+            > .arrow{
+                position:relative;
+                width: 15px;
+                background-image: url(./image/Down_Arrow.png);
+                background-size: 15px;
+                background-repeat: no-repeat;
+                transform: translate(-650%);
+                filter:brightness(10);
+            }
+            > .arrow.expand{
+                position:relative;
+                width: 15px;
+                background-image: url(./image/Upward_Arrow.png);
+                background-size: 15px;
+                background-repeat: no-repeat;
+                transform: translate(-650%);
+                filter:brightness(10);
+            }
+        }
         > .summary{
             display: flex;
             justify-content: space-evenly;
