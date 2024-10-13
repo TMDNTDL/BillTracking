@@ -24,9 +24,10 @@ const billStore = createSlice({
 const { setBillList, setActiveIndex } = billStore.actions
 
 const getBillList = () =>{
-    return (dispatch) =>{
+    return async(dispatch) =>{
         // get data
-        const res = axios.get('http://localhost:8888/ka')
+        const res =await axios.get('http://localhost:8887/ka')
+        //console.log("res: " + res.ka)
         dispatch(setBillList(res.data))
     }
 }

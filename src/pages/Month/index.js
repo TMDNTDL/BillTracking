@@ -1,9 +1,20 @@
 import { DatePicker } from 'antd-mobile';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import './index.scss';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
+import _ from 'lodash'
+import { useSelector } from 'react-redux';
+
 const Month = () =>{
+    // category the data
+    const billList = useSelector(state => state.bill.billList)
+    console.log(billList)
+    const monthGroup = useMemo(() => {
+        // return the procesed value
+        return _.groupBy(billList, (item) => dayjs(item.date).format('YYYY-MM'))
+    },[billList])
+    console.log(monthGroup)
     // control the time picker
     const [dateVisible, setDateVisible] = useState(false)
 
@@ -11,13 +22,31 @@ const Month = () =>{
     const [currentDate, setCurrentDate] = useState(()=>{
         return dayjs(new Date()).format('YYYY-MM')
     })
+
+    // MonthList
+    const [currentMonthList, setMonthList] = useState([])
+    // calculate the spents
+    const monthResult = useMemo(() => {
+        //spent
+        const pay = currentMonthList.filter(item=> item.type === 'pay').reduce((a,c) => a + c.money, 0)
+        // income
+        const income = currentMonthList.filter(item => item.type === 'income').reduce((a,c) => a + c.money, 0)
+        console.log(pay, income)
+        return {
+            pay,
+            income,
+            total: pay + income
+        }
+    })
+
     const onConfirm = (date) =>{
         setDateVisible(false)
         const formatDate = dayjs(date).format('YYYY-MM')
+        setMonthList(monthGroup[formatDate])
         setCurrentDate(formatDate)
         console.log(date)
     }
-    console.log('arrow', dateVisible && 'expand')
+
     return( 
         <div className="monthyBill">
             <div className="title">
@@ -30,15 +59,15 @@ const Month = () =>{
                 </div>
                 <div className="summary">
                     <div className="spent">
-                        <span className="spent-amount">{100}</span>
+                        <span className="spent-amount">{monthResult.pay.toFixed(2)}</span>
                         <div className="title-spent">spent</div>
                     </div>
                     <div className="income">
-                        <span className="income-amount">{200}</span>
+                        <span className="income-amount">{monthResult.income.toFixed(2)}</span>
                         <div className="title-income">Income</div>
                     </div>
                     <div className="remain">
-                        <span className="remain-amount">{100}</span>
+                        <span className="remain-amount">{monthResult.total.toFixed(2)}</span>
                         <div className="title-remain">Remain</div>
                     </div>
                 </div>
