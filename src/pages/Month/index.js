@@ -2,9 +2,21 @@ import { DatePicker } from 'antd-mobile';
 import { useState } from 'react';
 import './index.scss';
 import classNames from 'classnames';
+import dayjs from 'dayjs';
 const Month = () =>{
     // control the time picker
     const [dateVisible, setDateVisible] = useState(false)
+
+    // display the time
+    const [currentDate, setCurrentDate] = useState(()=>{
+        return dayjs(new Date()).format('YYYY-MM')
+    })
+    const onConfirm = (date) =>{
+        setDateVisible(false)
+        const formatDate = dayjs(date).format('YYYY-MM')
+        setCurrentDate(formatDate)
+        console.log(date)
+    }
     console.log('arrow', dateVisible && 'expand')
     return( 
         <div className="monthyBill">
@@ -13,7 +25,7 @@ const Month = () =>{
             </div>
             <div className="header">
                 <div className="date" onClick={() => setDateVisible(true)}>
-                    <span className="text">2023 | Feb bill</span>
+                    <span className="text">{currentDate + ' bill'}</span>
                     <span className={classNames('arrow', dateVisible && 'expand')} ></span>
                 </div>
                 <div className="summary">
@@ -38,7 +50,7 @@ const Month = () =>{
                     precision='month'
                     visible={dateVisible}
                     onCancel={() => setDateVisible(false)}
-                    onConfirm={()=> setDateVisible(false)}
+                    onConfirm={onConfirm}
                     onClose={() => setDateVisible(false)}
                     max={new Date()}
                 />

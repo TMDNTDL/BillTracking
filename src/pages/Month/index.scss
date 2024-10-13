@@ -32,26 +32,6 @@
         //     padding: 20px 20px 0px 18.5px;
         //     margin-bottom: 10px;
         // }
-        > .date{
-            > .arrow{
-                position:relative;
-                width: 15px;
-                background-image: url(./image/Down_Arrow.png);
-                background-size: 15px;
-                background-repeat: no-repeat;
-                transform: translate(-650%);
-                filter:brightness(10);
-            }
-            > .arrow.expand{
-                position:relative;
-                width: 15px;
-                background-image: url(./image/Upward_Arrow.png);
-                background-size: 15px;
-                background-repeat: no-repeat;
-                transform: translate(-650%);
-                filter:brightness(10);
-            }
-        }
         > .summary{
             display: flex;
             justify-content: space-evenly;
@@ -70,18 +50,38 @@
         > .date{
             width: 100%;
             display: flex;
-            justify-content: center;
-
+            justify-content: flex-start;
+            align-items: center;
+            gap: 10px;
             // use justify-content to center flex item within their contianer
             // use text-align to control how the text is aligned within its specific block container
             // by default if you were to remove text-align the text in the block will be initially align-left.
             > .text{
                 // position: absolute;
-                left: 50%;
+                margin-left: 40px;
+                margin-right: 5px;
                 text-align: center;
-                transform: translate(-95%,-0%);
+                //transform: translate(-95%,-0%);
                 font-family: 'Courier New', Courier, monospace;
                 color: #ffffff;
+            }
+            > .arrow{
+                height: 15px;
+                width: 15px;
+                background-image: url(./image/Down_Arrow.png);
+                background-size: 15px;
+                background-repeat: no-repeat;
+                // transform: translate(-650%);
+                filter:brightness(10);
+            }
+            > .arrow.expand{
+                position:relative;
+                width: 15px;
+                background-image: url(./image/Upward_Arrow.png);
+                background-size: 15px;
+                background-repeat: no-repeat;
+                // transform: translate(-600%);
+                filter:brightness(10);
             }
         }
     }
