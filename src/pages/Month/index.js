@@ -1,11 +1,11 @@
 import { DatePicker } from 'antd-mobile';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import './index.scss';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
 import _ from 'lodash'
 import { useSelector } from 'react-redux';
-
+import DayBill from './components/DayBill'
 const Month = () =>{
     // category the data
     const billList = useSelector(state => state.bill.billList)
@@ -38,6 +38,15 @@ const Month = () =>{
             total: pay + income
         }
     })
+    // -----------
+    // UseEffect
+    useEffect(()=>{
+        const nowDate = dayjs().format('YYYY-MM')
+        if(monthGroup[nowDate]){
+            setMonthList(monthGroup[nowDate])
+        }
+
+    }, [monthGroup])
 
     const onConfirm = (date) =>{
         setDateVisible(false)
@@ -85,7 +94,7 @@ const Month = () =>{
                 />
             </div>
 
-
+            <DayBill/>
             
         </div>
         

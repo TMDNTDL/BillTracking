@@ -1,0 +1,80 @@
+.dayBillContainer{
+    width: 100%;
+    height: 680px;
+    display: flex;
+    flex-direction: column;
+    > .bills{
+        height:70px;
+        display: flex;
+        flex-direction: column;
+        background-color: white;
+        border-radius: 10px;
+        margin-right: 10px;
+        margin-left: 10px;
+        margin-bottom: 10px;
+        > .header{
+            display: flex;
+            justify-content: flex-start;
+            gap: 15px;
+            > .date{
+                margin-top: 10px;
+                margin-bottom:10px;
+                font-family: 'Courier New', Courier, monospace;
+                font-size: 16px;
+                margin-left: 40px;
+            }
+            > .arrow{
+                margin-top: 13px;
+                margin-bottom:10px;
+                height: 15px;
+                width: 15px;
+                background-image: url(./image/Down_Arrow.png);
+                background-size: 15px;
+                background-repeat: no-repeat;
+            }
+        }
+        > .MoneySummary{
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+        
+            > .spent{
+                display: flex;
+                //flex-direction: column;
+                justify-content: center;
+                gap:5px;
+                color:grey;
+                > .spent-title{
+                    color: red;
+                }
+            }
+            > .income{
+                display: flex;
+                //flex-direction: column;
+                justify-content: center;
+                gap:5px;
+                color: gray;
+                > .income-title{
+                    color: gray;
+                }
+            }
+            > .Remain{
+                display: flex;
+                //flex-direction: column;
+                justify-content: center;
+                gap:5px;
+                > .remain-title{
+                    margin-top: 2px;
+                    text-align: center;
+                    color: gray;
+                }
+                > .remain-amount{
+                    font-weight: bold;
+                    font-size:17px;
+                }
+            }
+        }
+    }
+    
+} 
