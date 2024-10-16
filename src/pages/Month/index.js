@@ -3,7 +3,7 @@ import { useState, useMemo, useEffect } from 'react';
 import './index.scss';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
-import _ from 'lodash'
+import _, { keys } from 'lodash'
 import { useSelector } from 'react-redux';
 import DayBill from './components/DayBill'
 const Month = () =>{
@@ -27,17 +27,21 @@ const Month = () =>{
     const [currentMonthList, setMonthList] = useState([])
     // calculate the spents
     const monthResult = useMemo(() => {
-        //spent
-        const pay = currentMonthList.filter(item=> item.type === 'pay').reduce((a,c) => a + c.money, 0)
-        // income
-        const income = currentMonthList.filter(item => item.type === 'income').reduce((a,c) => a + c.money, 0)
-        console.log(pay, income)
+        const paylist = currentMonthList.filter(item => item.type === 'pay')
+        
+        const pay = paylist.reduce((a,c) => a + c.money, 0)
+        const incomelist = currentMonthList.filter(item => item.type === 'income')
+        
+        const income = incomelist.reduce((a,c) => a + c.money, 0)
+        const total = pay + income
         return {
             pay,
             income,
-            total: pay + income
+            total
         }
-    })
+        
+    }, [currentMonthList])
+
     // -----------
     // UseEffect
     useEffect(()=>{
@@ -51,11 +55,29 @@ const Month = () =>{
     const onConfirm = (date) =>{
         setDateVisible(false)
         const formatDate = dayjs(date).format('YYYY-MM')
-        setMonthList(monthGroup[formatDate])
+        if(monthGroup[formatDate]){
+            setMonthList(monthGroup[formatDate])
+        }
+        else{
+            setMonthList([])
+        }
         setCurrentDate(formatDate)
-        console.log(date)
+        console.log()
     }
 
+    // category by day
+    const dayGroup = useMemo(() => {
+        
+        // return the procesed value
+        const groupDate = _.groupBy(currentMonthList, (item) => dayjs(item.date).format('YYYY-MM-DD'))
+        const keys = Object.keys(groupDate)
+        return {
+            groupDate,
+            keys
+        }
+    },[currentMonthList])
+    console.log(dayGroup.groupDate)
+    console.log(dayGroup.keys)
     return( 
         <div className="monthyBill">
             <div className="title">
@@ -68,15 +90,15 @@ const Month = () =>{
                 </div>
                 <div className="summary">
                     <div className="spent">
-                        <span className="spent-amount">{monthResult.pay.toFixed(2)}</span>
+                        <span className="spent-amount">{monthResult.pay}</span>
                         <div className="title-spent">spent</div>
                     </div>
                     <div className="income">
-                        <span className="income-amount">{monthResult.income.toFixed(2)}</span>
+                        <span className="income-amount">{monthResult.income}</span>
                         <div className="title-income">Income</div>
                     </div>
                     <div className="remain">
-                        <span className="remain-amount">{monthResult.total.toFixed(2)}</span>
+                        <span className="remain-amount">{monthResult.total}</span>
                         <div className="title-remain">Remain</div>
                     </div>
                 </div>
@@ -93,8 +115,12 @@ const Month = () =>{
                     max={new Date()}
                 />
             </div>
-
-            <DayBill/>
+            {
+                dayGroup.keys.map(key => {
+                    return <DayBill date={key} billList= {dayGroup.groupDate[key]}/>
+                })
+            }
+            
             
         </div>
         
