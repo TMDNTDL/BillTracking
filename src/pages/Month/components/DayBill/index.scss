@@ -8,10 +8,11 @@
         display: flex;
         flex-direction: column;
         background-color: white;
-        border-radius: 10px;
+        border-radius: 3px;
+        margin-top: 10px;
         margin-right: 10px;
         margin-left: 10px;
-        margin-bottom: 10px;
+        margin-bottom: 1px;
         > .header{
             display: flex;
             justify-content: flex-start;
@@ -77,5 +78,33 @@
             }
         }
     }
-    
+    > .detail{
+        display: flex;
+        justify-content: space-around;
+        vertical-align:baseline;
+        background-color: white;
+        border-radius: 3px;
+        margin-right: 10px;
+        margin-left: 10px;
+        
+        gap: 240px;
+
+        height: 40px;
+        
+        > .usefor{
+            color:black;
+            margin-top : 12px;
+            font-size:15px;
+        }
+        > .money.income{
+            margin-top : 12px;
+            font-size: 15px;
+            color:green;
+        }
+        > .money.pay{
+            margin-top : 12px;
+            font-size: 15px;
+            color:red;
+        }
+    }
 } 
