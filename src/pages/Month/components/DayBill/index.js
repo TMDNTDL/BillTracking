@@ -42,7 +42,16 @@ const DayBill = ({date, billList})=>{
                 
                 </div>
             </div>
+            {billList.map(item => {
+                return(
+                    <div className='detail'>
+                        <span className="usefor">{item.useFor}</span>
+                        <span className={classNames('money', item.type)}>{item.money.toFixed(2)}</span>
+                    </div>
+                )
+            })}
             
+
         </div>
     )
 }
