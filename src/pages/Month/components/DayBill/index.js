@@ -1,10 +1,11 @@
 import classNames from "classnames";
 import './index.scss'
 import { useMemo } from 'react'
+import { useState } from "react";
 const DayBill = ({date, billList})=>{
     console.log(date)
     console.log(billList)
-
+    const [toogle, setToogle] = useState(false)
     // calculate the result
     const dayResult = useMemo(() =>{
         const pay = billList.filter(item => item.type === 'pay').reduce((a,c) => a + c.money, 0)
@@ -16,13 +17,13 @@ const DayBill = ({date, billList})=>{
             remain
         }
     }, [billList])
-
+    console.log(toogle)
     return(
         <div className="dayBillContainer">
             <div className="bills">
                 <div className="header">
                     <span className="date">{date}</span>
-                    <span className="arrow"></span>
+                    <span className={classNames('arrow', toogle && 'expand')} onClick={() => setToogle(!toogle)}></span>
                 </div>
                 <div className="MoneySummary">
                     <div className="spent">
@@ -44,7 +45,7 @@ const DayBill = ({date, billList})=>{
             </div>
             {billList.map(item => {
                 return(
-                    <div className='detail'>
+                    <div className={classNames('detail', toogle && "visible")}>
                         <span className="usefor">{item.useFor}</span>
                         <span className={classNames('money', item.type)}>{item.money.toFixed(2)}</span>
                     </div>

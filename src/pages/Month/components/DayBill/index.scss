@@ -32,6 +32,16 @@
                 background-image: url(./image/Down_Arrow.png);
                 background-size: 15px;
                 background-repeat: no-repeat;
+                transition: transform 0.3s ease;
+            }
+            > .arrow.expand{
+                //margin-top: 13px;
+                margin-bottom:10px;
+                height: 15px;
+                width: 15px;
+                
+                transform: rotate(180deg) translateY(5px)
+                
             }
         }
         > .MoneySummary{
@@ -45,9 +55,10 @@
                 //flex-direction: column;
                 justify-content: center;
                 gap:5px;
-                color:grey;
-                > .spent-title{
-                    color: red;
+                color:black;
+                
+                > .spent-amount{
+                    color:red;
                 }
             }
             > .income{
@@ -55,9 +66,10 @@
                 //flex-direction: column;
                 justify-content: center;
                 gap:5px;
-                color: gray;
-                > .income-title{
-                    color: gray;
+                color: black;
+                > .income-amount{
+                    color: green;
+                    font-size: 14px;
                 }
             }
             > .Remain{
@@ -79,6 +91,9 @@
         }
     }
     > .detail{
+        display: none;
+    }
+    > .detail.visible{
         display: flex;
         justify-content: space-around;
         vertical-align:baseline;
@@ -86,7 +101,7 @@
         border-radius: 3px;
         margin-right: 10px;
         margin-left: 10px;
-        
+        margin-bottom:1px;
         gap: 240px;
 
         height: 40px;
