@@ -2,6 +2,7 @@ import classNames from "classnames";
 import './index.scss'
 import { useMemo } from 'react'
 import { useState } from "react";
+import Icon from "@/components/icon";
 const DayBill = ({date, billList})=>{
     console.log(date)
     console.log(billList)
@@ -46,7 +47,11 @@ const DayBill = ({date, billList})=>{
             {billList.map(item => {
                 return(
                     <div className={classNames('detail', toogle && "visible")}>
-                        <span className="usefor">{item.useFor}</span>
+                        <div className="icon-usefor">
+                            <Icon type={item.useFor}/>
+                            <span className="usefor">{item.useFor}</span>
+                        </div>
+                        
                         <span className={classNames('money', item.type)}>{item.money.toFixed(2)}</span>
                     </div>
                 )
