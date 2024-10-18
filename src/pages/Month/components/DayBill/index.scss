@@ -95,7 +95,7 @@
     }
     > .detail.visible{
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
         vertical-align:baseline;
         background-color: white;
         border-radius: 3px;
@@ -103,21 +103,32 @@
         margin-left: 10px;
         margin-bottom:1px;
         gap: 240px;
-
+        
         height: 40px;
         
-        > .usefor{
+        > .icon-usefor{
             color:black;
-            margin-top : 12px;
-            font-size:15px;
+            //margin-top : 12px;
+            //font-size:15px;
+            display: flex;
+            justify-content: center;
+            margin-left:10px;
+            margin-top:3px;
+            > .usefor{
+                margin-top : 8px;
+                font-size:15px;
+            }
+            
         }
         > .money.income{
             margin-top : 12px;
+            margin-right:10px;
             font-size: 15px;
             color:green;
         }
         > .money.pay{
             margin-top : 12px;
+            margin-right:10px;
             font-size: 15px;
             color:red;
         }
