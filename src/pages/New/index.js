@@ -1,27 +1,68 @@
 import Icon from "@/components/icon"
-import { DatePicker } from "antd-mobile"
+import { DatePicker, setDefaultConfig } from "antd-mobile"
 import { useNavigate } from "react-router-dom"
 import { billListData } from "@/TypeList/BillList"
 import { useState } from "react"
 import classNames from "classnames"
 import './index.scss'
+import { Value } from "sass"
+import { addBillList } from "@/store/modules/billStore"
+import { useDispatch } from "react-redux"
+import { createSelectorCreator } from "@reduxjs/toolkit"
+import dayjs from "dayjs"
+
 const New = () =>{
 
-    const [userValue, setUserValue ] = useState('')
-    const [select, setSelect] = useState(true)
-    const navigate = useNavigate
+    const [userValue, setUserValue ] = useState(null)
+    const [useFor, setUseFor ] = useState('')
+    const [type, setType] = useState('pay')
+    const [toggle, setToggle] = useState(false)
+    const [date, setDate] = useState()
+    const dispatch = useDispatch()
+
+    const navigate = useNavigate()
     const handleInputChange = (e) => {
         setUserValue(e.target.value);
     };
 
     const BillChange = () =>{
-        setSelect(!select)
+        if(type == 'pay'){
+            setType('income')
+        }
+        else{
+            setType('pay')
+        }
     }
 
+    const onClick =(value)=>{
+        setUseFor(value)
+        console.log(useFor)
+        //setToggle(!toggle)
+    }
+
+    // Save Bill
+    const saveBill = () => {
+        if(userValue === null || userValue === "" ){
+            return alert("must need a value")
+        }
+        const data ={
+            type:type,
+            money: type === 'pay' ? -userValue : userValue,
+            date : date,
+            useFor: useFor
+        }
+        dispatch(addBillList(data))
+        console.log(data)
+    }
+    const onDateConfirm = (value) =>{
+        setDate(value)
+        setToggle(false)
+        
+    }
     return(
         <div className="newBill">
             <div className="headLine">
-                <span className="GoBack-arrow">
+                <span className="GoBack-arrow" onClick={()=>navigate(-1)}>
                     <Icon type="backArrow" className="backArrow"/>
                 </span>
                 <span className="newBill-title">Record Bill</span>
@@ -29,22 +70,25 @@ const New = () =>{
             
             <div className="header">
                 <div className="option">
-                    <span className={classNames("spent-button", select && 'selected')} onClick={BillChange}>
+                    <span className={classNames("spent-button", type =='pay' && 'selected')} onClick={BillChange}>
                         spent
                     </span>
-                    <span className={classNames("income-button", !select && 'selected')} onClick={BillChange}>
+                    <span className={classNames("income-button", type == 'income' && 'selected')} onClick={BillChange}>
                         income
                     </span>
                 </div>
                 <div className="form-wrapper">
                     <div className="form">
-                        <div className="date">
-                            <Icon type="calendar" className="icon"/>
-                            <span className="text">{"Today"}</span>
+                        <div className="date" onClick={()=> setToggle(true)}>
+                            <Icon type="calendar" className="icon" />
+                            <span className="text" >{dayjs(date).format('YYYY-MM-DD')}</span>
                             <DatePicker
                                 className="date-input"
-                                aria-placeholder="0.00"
-                                type="number"
+                                title='Bill Date'
+                                max = {new Date()}
+                                visible={toggle}
+                                onConfirm={onDateConfirm}
+                                onClose={()=> setToggle(false)}
                             />
                         </div>
                         <div className="input-content">
@@ -61,8 +105,8 @@ const New = () =>{
                 </div>
             </div>
             <div className="typeList">
-                {billListData['pay'].map(item=>{
-                    console.log(billListData['pay'])
+                {billListData[type].map(item=>{
+                    
                     return(
                         <div className="Type">
                             <div className="title">{item.name}</div>
@@ -72,9 +116,11 @@ const New = () =>{
                                         <div
                                             className={classNames(
                                                 'item',
-                                                ''
+                                                useFor === item.type &&
+                                                'selected'
                                             )}
                                             key={item.type}
+                                            onClick={() => onClick(item.type)}
                                         >
                                             <div className={`icon`}>
                                                 <Icon type={item.type}/>
@@ -89,6 +135,12 @@ const New = () =>{
                         
                     )
                 })}
+            </div>
+            <div className="saveButton-Wrap">
+                <button className="saveButton" onClick={saveBill}>Save
+                    <span className="saveText" ></span>   
+                </button>
+                    
             </div>
         </div>
     )

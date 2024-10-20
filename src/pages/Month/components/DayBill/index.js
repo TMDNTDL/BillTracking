@@ -18,7 +18,8 @@ const DayBill = ({date, billList})=>{
             remain
         }
     }, [billList])
-    console.log(toogle)
+    console.log(dayResult)
+   
     return(
         <div className="dayBillContainer">
             <div className="bills">
@@ -44,17 +45,24 @@ const DayBill = ({date, billList})=>{
                 
                 </div>
             </div>
+            
             {billList.map(item => {
-                return(
-                    <div className={classNames('detail', toogle && "visible")}>
-                        <div className="icon-usefor">
-                            <Icon type={item.useFor}/>
-                            <span className="usefor">{item.useFor}</span>
+                console.log(billList)
+                if(item.money !== null){
+                    return(
+                    
+                        <div className={classNames('detail', toogle && "visible")}>
+                            <div className="icon-usefor">
+                                <Icon type={item.useFor}/>
+                                <span className="usefor">{item.useFor}</span>
+                            </div>
+                            
+                            <span className={classNames('money', item.type)}>{item.money.toFixed(2)}</span>
                         </div>
-                        
-                        <span className={classNames('money', item.type)}>{item.money.toFixed(2)}</span>
-                    </div>
-                )
+                    )
+                }
+                
+                
             })}
             
 
