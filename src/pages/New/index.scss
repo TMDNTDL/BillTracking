@@ -93,13 +93,16 @@
             //width: 95%;
             > .form{
                 display: flex;
+                justify-content: left;
                 padding:11px 15px 11px 12px;
                 border: 0.5px solid gray;
                 border-radius: 9px;
                 background-color: #fff;
                 width: 300px;
                 > .date{
-                    display: flex;
+                    display: inline-flex;
+                    width: auto;
+                    width: 190px;
                     align-items: center;
                     height: 20px;
                     padding: 5.5px 5px;
@@ -116,6 +119,10 @@
                         font-size: 17px;
                     }
                     > .text{
+                        display: inline-flex;
+                        //width: auto;
+                        width: 82px;
+                        
                         font-size:16px;
                     }
                 }
@@ -123,10 +130,11 @@
                     flex:1;
                     display: flex;
                     align-items: center;
+                    //justify-content: left;
                     > .input{
                         border:none;
                         height:25px;
-                        width: 214px;
+                        width: 170px;
                         text-align: right;
                         font-size:20px;
                         color:green;
@@ -203,9 +211,72 @@
                     }
                 }
                 > .item.selected{
-
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    width:65px;
+                    height:65px;
+                    
+                    background-color: #c5fac6;
+                    padding-left: 5px;
+                    margin-right:7px;
+                    text-align: center;
+                    justify-content: center;
+                    border:0.5px solid #fff;
+                    border-radius: 10px;
                 }
             }
         }
+    }
+    > .saveButton-Wrap{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        position: fixed;
+        
+        bottom: 15px;
+        
+        > .saveButton{
+            padding: 20px 70px;
+            overflow: hidden;
+            background-color: #d5f5df;
+            border: none;
+            outline: none;
+            position: relative;
+            z-index: 1;
+            border-radius: 15px;
+            color:white;
+            font-weight: bolder;
+            > .saveText{
+                position: absolute;
+                height: 250px;
+                width: 250px;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50% , -50%);
+                background-color:green;
+                z-index: -1;
+                border-radius: 50%;
+                
+                &:active{
+                   
+                    animation: button_animation 1s ease;
+                }
+            }
+            @keyframes button_animation{
+                0% {
+                    opacity: 0;
+                    margin-top: 3px;
+                    transform: translate(-50%, -50%) scale(0);
+                }
+                
+                100%{
+                    opacity: 1;
+                    transform: translate(-50%, -50%) scale(1);
+                }
+            }
+        }
+        
     }
 }
